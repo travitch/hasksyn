@@ -26,7 +26,7 @@ setlocal indentkeys+=0=where
 setlocal indentkeys+=0=->
 setlocal indentkeys+=0==>
 setlocal indentkeys+=0=in
-setlocal indentkeys+=0=class,0=instance
+setlocal indentkeys+=0=class,0=instance,0=import
 setlocal indentkeys+=<Bar>
 setlocal indentkeys+=0\,
 
@@ -103,7 +103,7 @@ function! HIndent(lnum)
 
   " We don't send data or type to column zero because they can be indented
   " inside of 'class' definitions for data/type families
-  if thisl =~ '^\s*\(class\|instance\|newtype\)'
+  if thisl =~ '^\s*\(class\|instance\|newtype\|import\)'
     return 0
   endif
 
