@@ -27,7 +27,7 @@ syn match  hsFloat            "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 " a capital letter.  Note that this also handles the case of @M.lookup@ where
 " M is a qualified import.  There is a big negative lookbehind assertion here
 " so that we don't highlight import and module statements oddly. 
-syn match hsTypeName "\(import.*\|module.*\)\@<!\([^a-zA-Z0-9]\)\@<=[A-Z][a-zA-Z0-9_]*"
+syn match hsTypeName "\(^import\s.*\|^module\s.*\)\@<!\([^a-zA-Z0-9]\)\@<=[A-Z][a-zA-Z0-9_]*"
 " Also make unit and the empty list easy to spot - they are constructors too.
 syn match hsTypeName "()"
 syn match hsTypeName "\[\]"
@@ -66,7 +66,7 @@ syn keyword hsConditional case of if then else
 
 " We define a region for module NNNN (...) where so that haddock section
 " headers (-- *) can be highlighted specially only within this context.
-syn region hsModuleHeader start="^module" end="where" contains=hsHaddockSection keepend fold transparent
+syn region hsModuleHeader start="^module\s" end="where" contains=hsHaddockSection keepend fold transparent
 " Treat Module imports as the #include category; it maps reasonably well
 syn keyword hsImport import qualified as hiding module
 
