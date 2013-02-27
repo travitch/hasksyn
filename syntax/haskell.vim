@@ -57,6 +57,7 @@ syn match hsHaddockSection '-- \$.*$'
 syn keyword hsKeyword do let in _ where
 syn keyword hsKeyword infix infixl infixr
 syn keyword hsKeyword forall foreign
+syn match hsKeyword '\(^\(data\|type\)\s\+\)\@<=family\(\W\)\@='
 
 " Vim has a special syntax category for conditionals, so here are all of the
 " haskell conditionals.  These are just keywords with a slightly more flexible
