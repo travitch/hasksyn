@@ -110,7 +110,7 @@ function! HIndent(lnum)
   " FIXME: Only do this if the previous line was not already indented for the
   " same reason.  Also be careful of -> in type signatures.  Make sure we have
   " an earlier rule to line those up properly.
-  if prevl =~ '[=>\$\.\^+\&`-]\s*$'
+  if prevl =~ '[=>\$\.\^+\&`(-]\s*$'
     return previ + &sw
   endif
 
