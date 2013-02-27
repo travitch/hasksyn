@@ -11,6 +11,13 @@ Unlike [haskellmode-vim](http://projects.haskell.org/haskellmode-vim/) and
 [vim2hs](https://github.com/dag/vim2hs), this package does not support running
 external tools over code in fancy ways or recognizing cabal files.
 
+## Screenshot
+
+Here is a screenshot of the syntax highlighting (included in the demos
+directory):
+
+![screenshot](https://github.com/travitch/hasksyn/blob/master/demos/test1.png "Sample screenshot")
+
 ## Stability
 
 This mode seems to work reasonably well.  That said, it hasn't been thoroughly
