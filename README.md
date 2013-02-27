@@ -33,7 +33,6 @@ does not really seem to be an issue.
 ## TODO
 
  * Highlighting for `mdo`, `proc`, and `rec`
- * Maybe some highlighting of `family` for type families
  * Nesting block comments inside of haddock block documentation comments
  * Indentation for quasi-quotes (maybe)
  * More clever indentation, where sensible
