@@ -16,7 +16,7 @@ external tools over code in fancy ways or recognizing cabal files.
 Here is a screenshot of the syntax highlighting (included in the demos
 directory):
 
-![screenshot](https://github.com/travitch/hasksyn/blob/master/demos/test1.png "Sample screenshot")
+![screenshot](https://raw.github.com/travitch/hasksyn/master/demos/test1.png "Sample screenshot")
 
 ## Stability
 
