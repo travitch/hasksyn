@@ -87,11 +87,13 @@ syn match cabalBuildKey '\(^\s\+\)\@<=ld-options:'
 syn match cabalBuildKey '\(^\s\+\)\@<=pkgconfig-depends:'
 syn match cabalBuildKey '\(^\s\+\)\@<=frameworks:'
 
-syn region cabalFlagR start='^flag\s\@=' end='^\w' transparent keepend contains=cabalFlagKey,cabalCondition
+syn region cabalFlagR start='^flag\s\@=' end='^\w' transparent keepend contains=cabalFlagKey,cabalCondition,cabalFlag
 syn match cabalFlagKey '^flag\s\@='
 syn match cabalFlagKey '\(^\s\+\)\@<=description:'
 syn match cabalFlagKey '\(^\s\+\)\@<=default:'
 syn match cabalFlagKey '\(^\s\+\)\@<=manual:'
+syn match cabalFlag '\(flag\s\+\)\@<=\w\+'
+syn match cabalFlag '\(flag(\)\@<=\w\+)\@='
 
 syn region cabalSourceR start='^source-repository' end='^\w' transparent keepend contains=cabalSourceKey
 syn match cabalSourceKey '^source-repository\s\@='
@@ -122,6 +124,7 @@ if version >= 508 || !exists('did_cabal_syntax_inits')
     command -nargs=+ HiLink hi def link <args>
   endif
 
+  HiLink cabalFlag Special
   HiLink cabalComment Comment
   HiLink cabalCondition Conditional
   HiLink cabalSourceKey Keyword
