@@ -39,25 +39,25 @@ syn match cabalKey '^extra-tmp-files:'
 syn match cabalLit '\(:\s*\)\@<=\(true\|false\)'
 
 " Library-specifics
-syn region cabalLibraryR start='^library\(\s\|$\)\@=' end='^\w' transparent keepend contains=cabalLibrayKey,cabalBuildKey
+syn region cabalLibraryR start='^library\(\s\|$\)\@=' end='^\w' transparent keepend contains=cabalLibrayKey,cabalBuildKey,cabalCondition,cabalOperator
 syn match cabalLibraryKey '^library\(\s\|$\)\@='
 syn match cabalLibraryKey '\(^\s\+\)\@<=exposed-modules:'
 syn match cabalLibraryKey '\(^\s\+\)\@<=exposed:'
 
 " Executable-specifics
-syn region cabalExeR start='^executable\s\@=' end='^\w' transparent keepend contains=cabalExeKey,cabalBuildKey
+syn region cabalExeR start='^executable\s\@=' end='^\w' transparent keepend contains=cabalExeKey,cabalBuildKey,cabalCondition,cabalOperator
 syn match cabalExeKey '^executable\s\@='
 syn match cabalExeKey '\(^\s\+\)\@<=main-is:'
 
 " Test-specifics
-syn region cabalTestR start='^test-suite\s\@=' end='^\w' transparent keepend contains=cabalTestKey,cabalBuildKey
+syn region cabalTestR start='^test-suite\s\@=' end='^\w' transparent keepend contains=cabalTestKey,cabalBuildKey,cabalCondition,cabalOperator
 syn match cabalTestKey '^test-suite\s\@='
 syn match cabalTestKey '\(^\s\+\)\@<=type:'
 syn match cabalTestKey '\(^\s\+\)\@<=main-is:'
 syn match cabalTestKey '\(^\s\+\)\@<=test-module:'
 
 " Benchmark-specifics
-syn region cabalBenchR start='^benchmark\s\@=' end='^\w' transparent keepend contains=cabalBenchKey,cabalBuildKey
+syn region cabalBenchR start='^benchmark\s\@=' end='^\w' transparent keepend contains=cabalBenchKey,cabalBuildKey,cabalCondition,cabalOperator
 syn match cabalBenchKey '^benchmark\s\@='
 syn match cabalBenchKey '\(^\s\+\)\@<=type:'
 syn match cabalBenchKey '\(^\s\+\)\@<=main-is:'
@@ -82,9 +82,28 @@ syn match cabalBuildKey '\(^\s\+\)\@<=c-sources:'
 syn match cabalBuildKey '\(^\s\+\)\@<=extra-libraries:'
 syn match cabalBuildKey '\(^\s\+\)\@<=extra-lib-dirs:'
 syn match cabalBuildKey '\(^\s\+\)\@<=cc-options:'
+syn match cabalBuildKey '\(^\s\+\)\@<=cpp-options:'
 syn match cabalBuildKey '\(^\s\+\)\@<=ld-options:'
 syn match cabalBuildKey '\(^\s\+\)\@<=pkgconfig-depends:'
 syn match cabalBuildKey '\(^\s\+\)\@<=frameworks:'
+
+syn region cabalFlagR start='^flag\s\@=' end='^\w' transparent keepend contains=cabalFlagKey,cabalCondition
+syn match cabalFlagKey '^flag\s\@='
+syn match cabalFlagKey '\(^\s\+\)\@<=description:'
+syn match cabalFlagKey '\(^\s\+\)\@<=default:'
+syn match cabalFlagKey '\(^\s\+\)\@<=manual:'
+
+syn match cabalCondition '\(^\s\+\)\@<=if\((\|\s\)\@='
+syn match cabalCondition '\(^\s\+\)\@<=else\($\|\s\)\@='
+syn match cabalCondition '\(^\s\+\)\@<=if\((\|\s\)\@='
+syn match cabalCondition '\(^\s\+\)\@<=else\($\|\s\)\@='
+syn match cabalOperator '\W\@<=os\((.\+)\)\@='
+syn match cabalOperator '\W\@<=arch\((.\+)\)\@='
+syn match cabalOperator '\W\@<=impl\((.\+)\)\@='
+syn match cabalOperator '\W\@<=flag\((.\+)\)\@='
+syn match cabalOperator '\(<\|>\|=\)'
+
+syn match cabalComment '\s\@<=--.*$'
 
 if version >= 508 || !exists('did_cabal_syntax_inits')
   if version < 508
@@ -94,12 +113,16 @@ if version >= 508 || !exists('did_cabal_syntax_inits')
     command -nargs=+ HiLink hi def link <args>
   endif
 
+  HiLink cabalComment Comment
+  HiLink cabalCondition Conditional
+  HiLink cabalOperator Operator
   HiLink cabalKey Keyword
   HiLink cabalLibraryKey Keyword
   HiLink cabalTestKey Keyword
   HiLink cabalExeKey Keyword
   HiLink cabalBenchKey Keyword
   HiLink cabalBuildKey Keyword
+  HiLink cabalFlagKey Keyword
   HiLink cabalLit Constant
 
   delcommand HiLink
