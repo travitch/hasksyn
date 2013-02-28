@@ -6,4 +6,4 @@
 " that the three-part comment entry really messes up this indenter (I also
 " hate the leading '-'s it puts in on each line).  Disable it here.
 setlocal comments&
-
+setlocal comments=:--
