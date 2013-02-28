@@ -93,6 +93,15 @@ syn match cabalFlagKey '\(^\s\+\)\@<=description:'
 syn match cabalFlagKey '\(^\s\+\)\@<=default:'
 syn match cabalFlagKey '\(^\s\+\)\@<=manual:'
 
+syn region cabalSourceR start='^source-repository' end='^\w' transparent keepend contains=cabalSourceKey
+syn match cabalSourceKey '^source-repository\s\@='
+syn match cabalSourceKey '\(^\s\+\)\@<=type:'
+syn match cabalSourceKey '\(^\s\+\)\@<=location:'
+syn match cabalSourceKey '\(^\s\+\)\@<=module:'
+syn match cabalSourceKey '\(^\s\+\)\@<=branch:'
+syn match cabalSourceKey '\(^\s\+\)\@<=tag:'
+syn match cabalSourceKey '\(^\s\+\)\@<=subdir:'
+
 syn match cabalCondition '\(^\s\+\)\@<=if\((\|\s\)\@='
 syn match cabalCondition '\(^\s\+\)\@<=else\($\|\s\)\@='
 syn match cabalCondition '\(^\s\+\)\@<=if\((\|\s\)\@='
@@ -101,7 +110,7 @@ syn match cabalOperator '\W\@<=os\((.\+)\)\@='
 syn match cabalOperator '\W\@<=arch\((.\+)\)\@='
 syn match cabalOperator '\W\@<=impl\((.\+)\)\@='
 syn match cabalOperator '\W\@<=flag\((.\+)\)\@='
-syn match cabalOperator '\(<\|>\|=\)'
+syn match cabalOperator '\(<\|>\|=\|||\|&&\)'
 
 syn match cabalComment '\s\@<=--.*$'
 
@@ -115,6 +124,7 @@ if version >= 508 || !exists('did_cabal_syntax_inits')
 
   HiLink cabalComment Comment
   HiLink cabalCondition Conditional
+  HiLink cabalSourceKey Keyword
   HiLink cabalOperator Operator
   HiLink cabalKey Keyword
   HiLink cabalLibraryKey Keyword
