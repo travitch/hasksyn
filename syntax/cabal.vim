@@ -45,22 +45,24 @@ syn match cabalLibraryKey '\(^\s\+\)\@<=exposed-modules:'
 syn match cabalLibraryKey '\(^\s\+\)\@<=exposed:'
 
 " Executable-specifics
-syn region cabalExeR start='^executable\s\@=' end='^\w' transparent keepend contains=cabalExeKey,cabalBuildKey,cabalCondition,cabalOperator
+syn region cabalExeR start='^executable\s\@=' end='^\w' transparent keepend contains=cabalExeKey,cabalBuildKey,cabalCondition,cabalOperator,cabalBuildableName
 syn match cabalExeKey '^executable\s\@='
 syn match cabalExeKey '\(^\s\+\)\@<=main-is:'
 
 " Test-specifics
-syn region cabalTestR start='^test-suite\s\@=' end='^\w' transparent keepend contains=cabalTestKey,cabalBuildKey,cabalCondition,cabalOperator
+syn region cabalTestR start='^test-suite\s\@=' end='^\w' transparent keepend contains=cabalTestKey,cabalBuildKey,cabalCondition,cabalOperator,cabalBuildableName
 syn match cabalTestKey '^test-suite\s\@='
 syn match cabalTestKey '\(^\s\+\)\@<=type:'
 syn match cabalTestKey '\(^\s\+\)\@<=main-is:'
 syn match cabalTestKey '\(^\s\+\)\@<=test-module:'
 
 " Benchmark-specifics
-syn region cabalBenchR start='^benchmark\s\@=' end='^\w' transparent keepend contains=cabalBenchKey,cabalBuildKey,cabalCondition,cabalOperator
+syn region cabalBenchR start='^benchmark\s\@=' end='^\w' transparent keepend contains=cabalBenchKey,cabalBuildKey,cabalCondition,cabalOperator,cabalBuildableName
 syn match cabalBenchKey '^benchmark\s\@='
 syn match cabalBenchKey '\(^\s\+\)\@<=type:'
 syn match cabalBenchKey '\(^\s\+\)\@<=main-is:'
+
+syn match cabalBuildableName '\(^\(^benchmark\|test-suite\|executable\)\s\+\)\@<=\w\+'
 
 " General build info
 syn match cabalBuildKey '\(^\s\+\)\@<=default-language:'
@@ -124,6 +126,7 @@ if version >= 508 || !exists('did_cabal_syntax_inits')
     command -nargs=+ HiLink hi def link <args>
   endif
 
+  HiLink cabalBuildableName Structure
   HiLink cabalFlag Special
   HiLink cabalComment Comment
   HiLink cabalCondition Conditional
