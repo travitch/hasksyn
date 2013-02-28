@@ -2,10 +2,11 @@
 
 hasksyn is a vim plugin to highlight and indent Haskell source code.  It is
 written almost entirely from scratch and has slightly different goals than the
-original Haskell syntax highlighting code.  Most importantly, this version 
+original Haskell syntax highlighting code.  Most importantly, this version
 explicitly does _not_ handle Literate Haskell files at all.  In exchange, it
 provides more comprehensive syntax highlighting for normal Haskell code, along
-with fairly reasonable indentation.
+with fairly reasonable indentation.  It also includes improved highlighting
+for cabal files.
 
 Unlike [haskellmode-vim](http://projects.haskell.org/haskellmode-vim/) and
 [vim2hs](https://github.com/dag/vim2hs), this package does not support running
@@ -49,7 +50,7 @@ As far as I can tell, this package should provide better Haskell indentation
 than other modes.  Here is a brief overview of its features:
 
  * Smart handling of comments and strings; it should be doing the right thing
-   almost all of the time.  The expected exception is if you are inside of a 
+   almost all of the time.  The expected exception is if you are inside of a
    very long block comment where the comment beginning is farther back than
    the search allowance.
 
