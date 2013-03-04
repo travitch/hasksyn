@@ -114,7 +114,7 @@ syn match cabalOperator '\W\@<=os\((.\+)\)\@='
 syn match cabalOperator '\W\@<=arch\((.\+)\)\@='
 syn match cabalOperator '\W\@<=impl\((.\+)\)\@='
 syn match cabalOperator '\W\@<=flag\((.\+)\)\@='
-syn match cabalOperator '\(<\|>\|=\|||\|&&\)'
+syn match cabalOperator '\(^\s*--.*\)\@<!\(<\|>\|=\|||\|&&\)'
 
 syn match cabalComment '\s\@<=--.*$'
 
