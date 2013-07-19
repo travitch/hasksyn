@@ -81,7 +81,7 @@ syn match hsOperator "<-\|->\|-->\|-\(-\)\@!\|[%\~\&\*/\$\^|@:+<!>=]\+"
 " A bare . is an operator (but not surrounded by alnum chars)
 syn match hsOperator "\s\@<=\.\s\@="
 " . is also an operator if adjacent to some other operator char
-syn match hsOperator "[%\~\&\*\$\^|@:+<!>=]+\.[%\~\&\*\$\^|@:+<\.!>=]*"
+syn match hsOperator "[%\~\&\*\$\^|@:+<!>=]\+\.[%\~\&\*\$\^|@:+<\.!>=]*"
 syn match hsOperator "[%\~\&\*\$\^|@:+<!>=]*\.[%\~\&\*\$\^|@:+\.<!>=]\+"
 " Include support for infix functions as operators
 syn match hsOperator "`[a-zA-Z0-9\.]\+`"
