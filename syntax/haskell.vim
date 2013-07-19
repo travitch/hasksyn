@@ -77,12 +77,12 @@ syn keyword hsTypeDecls class instance data newtype type deriving default
 " This is uglier than I'd like.  We want to let '-' participate in operators,
 " but we can't let it match '--' because that interferes with comments.  Hacks
 " for now - just include some common operators with '-'.
-syn match hsOperator "<-\|->\|-->\|-\(-\)\@!\|[%\~\&\*/\$\^|@:+<!>=]\+"
+syn match hsOperator "<-\|->\|-->\|-\(-\)\@!\|[%\~\&\*/\$\^|@:+<!>=#!\?]\+"
 " A bare . is an operator (but not surrounded by alnum chars)
 syn match hsOperator "\s\@<=\.\s\@="
 " . is also an operator if adjacent to some other operator char
-syn match hsOperator "[%\~\&\*\$\^|@:+<!>=]+\.[%\~\&\*\$\^|@:+<\.!>=]*"
-syn match hsOperator "[%\~\&\*\$\^|@:+<!>=]*\.[%\~\&\*\$\^|@:+\.<!>=]\+"
+syn match hsOperator "[%\~\&\*\$\^|@:+<!>=#!\?]\+\.[%\~\&\*\$\^|@:+<\.!>=#!\?]*"
+syn match hsOperator "[%\~\&\*\$\^|@:+<!>=#!\?]*\.[%\~\&\*\$\^|@:+\.<!>=#!\?]\+"
 " Include support for infix functions as operators
 syn match hsOperator "`[a-zA-Z0-9\.]\+`"
 
@@ -90,10 +90,11 @@ syn match hsOperator "`[a-zA-Z0-9\.]\+`"
 " after a name.  This allows whitespace before the name so that it can match
 " in a 'where,' but it won't match local type annotations on random little
 " things.
-syn match hsFunction "^\s*[a-z][a-zA-Z0-9]*\(\s*::\)\@="
+syn match hsFunctionList "^\s*\([a-z][a-zA-Z0-9']*[[:space:]\n,]\+\)*[a-z][a-zA-Z0-9']*[[:space:]\n]*::" contains=hsFunction
+syn match hsFunction "\s*[a-z][a-zA-Z0-9']*[[:space:]\n]*\(::\|,\)\@=" contained
 " Also support the style where the first where binding is on the same line as
 " the where keyword.
-syn match hsFunction "\(^\s\+where\s\+\)\@<=[a-z][a-zA-Z0-9]*\(\s*::\)\@="
+syn match hsFunction "\(^\s\+where\s\+\)\@<=[a-z][a-zA-Z0-9']*\(\s*::\)\@="
 
 " FIXME Ignoring proc for now, also mdo and rec
 
