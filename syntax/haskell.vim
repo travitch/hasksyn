@@ -26,7 +26,7 @@ syn match  hsFloat            "\<[0-9]\+\.[0-9]\+\([eE][-+]\=[0-9]\+\)\=\>"
 " This case matches the names of types and constructors: names beginning with
 " a capital letter.  Note that this also handles the case of @M.lookup@ where
 " M is a qualified import.  There is a big negative lookbehind assertion here
-" so that we don't highlight import and module statements oddly. 
+" so that we don't highlight import and module statements oddly.
 syn match hsTypeName "\(^import\s.*\|^module\s.*\)\@<!\([^a-zA-Z0-9]\)\@<=[A-Z][a-zA-Z0-9_]*"
 " Also make unit and the empty list easy to spot - they are constructors too.
 syn match hsTypeName "()"
@@ -37,16 +37,16 @@ syn keyword hsFIXME contained FIXME TODO XXX BUG NOTE
 
 " Comment stuff
 syn region hsPragma start='{-#' end='#-}'
-syn region hsBlockComment start='{-' end='-}' fold contains=hsFIXME,hsBlockComment
+syn region hsBlockComment start='{-' end='-}' fold contains=hsFIXME,hsBlockComment,@Spell
 " FIXME: haddock block comments should be able to contain hsBlockComments, but
 " it doesn't seem to work at the moment.
-syn region hsHaddockComment start='{-|' end='-}' contains=hsFIXME
-syn match hsLineComment "--.*$" contains=hsFIXME
+syn region hsHaddockComment start='{-|' end='-}' contains=hsFIXME,@Spell
+syn match hsLineComment "--.*$" contains=hsFIXME,@Spell
 " Line-based haddock comments are trickier - they continue until
 " the next line that isn't part of the same block of comments.
-syn region hsHaddockComment start='-- |' end='^\(\s*--\)\@!' contains=hsFIXME
-syn region hsHaddockComment start='-- \$\w\+' end='^\(\s*--\)\@!' contains=hsFIXME
-syn region hsHaddockComment start='-- ^' end='^\(\s*--\)\@!' contains=hsFIXME
+syn region hsHaddockComment start='-- |' end='^\(\s*--\)\@!' contains=hsFIXME,@Spell
+syn region hsHaddockComment start='-- \$\w\+' end='^\(\s*--\)\@!' contains=hsFIXME,@Spell
+syn region hsHaddockComment start='-- ^' end='^\(\s*--\)\@!' contains=hsFIXME,@Spell
 " Haddock sections for import lists
 syn match hsHaddockSection '-- \*.*$'
 " Named documentation chunks (also for import lists)
