@@ -51,6 +51,8 @@ syn region hsHaddockComment start='-- ^' end='^\(\s*--\)\@!' contains=hsFIXME,@S
 syn match hsHaddockSection '-- \*.*$'
 " Named documentation chunks (also for import lists)
 syn match hsHaddockSection '-- \$.*$'
+" Treat a shebang line at the start of the file as a comment
+syn match hsLineComment "\%^\#\!.*$"
 
 
 " Keywords appearing in expressions, plus a few top-level keywords
