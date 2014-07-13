@@ -68,7 +68,9 @@ syn keyword hsConditional case of if then else
 " headers (-- *) can be highlighted specially only within this context.
 syn region hsModuleHeader start="^module\s" end="where" contains=hsHaddockSection keepend fold transparent
 " Treat Module imports as the #include category; it maps reasonably well
-syn keyword hsImport import qualified as hiding module
+syn keyword hsImport import module
+" Treat 'qualified', 'as', and 'hiding' as keywords when following 'import'
+syn match hsImport '\(\<import\>.*\)\@<=\<\(qualified\|as\|hiding\)\>'
 
 syn keyword hsTypeDecls class instance data newtype type deriving default
 " FIXME: Maybe we can do something fancy for data/type families?  'family' is
