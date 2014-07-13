@@ -76,15 +76,14 @@ syn keyword hsTypeDecls class instance data newtype type deriving default
 " FIXME: Maybe we can do something fancy for data/type families?  'family' is
 " only a keyword if it follows data/type...
 
-" This is uglier than I'd like.  We want to let '-' participate in operators,
-" but we can't let it match '--' because that interferes with comments.  Hacks
-" for now - just include some common operators with '-'.
-syn match hsOperator "<-\|->\|-->\|-\(-\)\@!\|[%\~\&\*/\$\^|@:+<!>=#!\?]\+"
+" We want to let '-' participate in operators, but we can't let it match
+" '--', '---', etc. because that interferes with comments.
+syn match hsOperator "\(--\+\([^%\~\&\*/\$\^|@:+<!>=#!\?]\|$\)\)\@![-%\~\&\*/\$\^|@:+<!>=#!\?]\+"
 " A bare . is an operator (but not surrounded by alnum chars)
 syn match hsOperator "\s\@<=\.\s\@="
 " . is also an operator if adjacent to some other operator char
-syn match hsOperator "[%\~\&\*\$\^|@:+<!>=#!\?]\+\.[%\~\&\*\$\^|@:+<\.!>=#!\?]*"
-syn match hsOperator "[%\~\&\*\$\^|@:+<!>=#!\?]*\.[%\~\&\*\$\^|@:+\.<!>=#!\?]\+"
+syn match hsOperator "[-%\~\&\*\$\^|@:+<!>=#!\?]\+\.[-%\~\&\*\$\^|@:+<\.!>=#!\?]*"
+syn match hsOperator "[-%\~\&\*\$\^|@:+<!>=#!\?]*\.[-%\~\&\*\$\^|@:+\.<!>=#!\?]\+"
 " Include support for infix functions as operators
 syn match hsOperator "`[a-zA-Z0-9\.]\+`"
 
