@@ -77,13 +77,10 @@ syn keyword hsTypeDecls class instance data newtype type deriving default
 " only a keyword if it follows data/type...
 
 " We want to let '-' participate in operators, but we can't let it match
-" '--', '---', etc. because that interferes with comments.
-syn match hsOperator "\(--\+\([^%\~\&\*/\$\^|@:+<!>=#!\?]\|$\)\)\@![-%\~\&\*/\$\^|@:+<!>=#!\?]\+"
-" A bare . is an operator (but not surrounded by alnum chars)
-syn match hsOperator "\s\@<=\.\s\@="
-" . is also an operator if adjacent to some other operator char
-syn match hsOperator "[-%\~\&\*\$\^|@:+<!>=#!\?]\+\.[-%\~\&\*\$\^|@:+<\.!>=#!\?]*"
-syn match hsOperator "[-%\~\&\*\$\^|@:+<!>=#!\?]*\.[-%\~\&\*\$\^|@:+\.<!>=#!\?]\+"
+" '--', '---', etc. because it interferes with comments. The same goes for
+" '#!' at the start of a file. Also, the dot (.) is an operator character,
+" but not when it comes immediately after a module name.
+syn match hsOperator "\(\%^\#\!\)\@!\(\(\<[A-Z]\w*\)\@64<=\.\)\@!\(--\+\([^.%\~\&\*/\$\^|@:+<!>=#!\?]\|$\)\)\@![-.%\~\&\*/\$\^|@:+<!>=#!\?]\+"
 " Include support for infix functions as operators
 syn match hsOperator "`[a-zA-Z0-9\.]\+`"
 
