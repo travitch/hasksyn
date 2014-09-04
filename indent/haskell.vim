@@ -94,7 +94,7 @@ function! HIndent(lnum)
   " name of your next binding happens to start with 'in', this will muck with
   " it.  Not sure if there is a workaround because we can't force an
   " auto-indent after 'in ' as far as I can see.
-  if thisl =~ '\s*in$'
+  if thisl =~ '\s*in\>'
     let letStart = s:BackwardPatternSearch(a:lnum, '\(\W\)\@<=let\W')
     if letStart != -1
       return letStart
